@@ -16,7 +16,6 @@ jobs:
     docker:
       - image: rust:1
     steps:
-
       - run:
           name: Run all tests
           command: cargo test --all
