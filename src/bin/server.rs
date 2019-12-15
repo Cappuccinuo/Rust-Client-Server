@@ -1,6 +1,11 @@
 use std::thread;
-use std::net::{TcpListener, SocketAddr};
+use std::net::{TcpListener, SocketAddr, TcpStream};
 use std::io;
+
+fn handle_client(_stream: TcpStream) -> bool {
+    // To-Do
+    true
+}
 
 fn main() -> io::Result<()> {
     /* TcpListener: https://doc.rust-lang.org/std/net/struct.TcpListener.html
@@ -22,10 +27,9 @@ fn main() -> io::Result<()> {
                 let peer_address = stream.peer_addr().unwrap();
                 println!("New connection: {}", peer_address);
                 drop(peer_address);
-                thread::spawn({
-                    // https://doc.rust-lang.org/edition-guide/rust-2018/error-handling-and-panics/the-question-mark-operator-for-easier-error-handling.html
+                thread::spawn(||{
                     // To-Do
-                    handle_client(stream?);
+                    handle_client(stream);
                 });
             }
             Err(e) => {
