@@ -25,6 +25,17 @@ jobs:
             - target/debug/build
             - target/debug/deps
           key: v4-cargo-cache-{{ arch }}-{{ checksum "Cargo.lock" }}
+  test:
+    docker:
+      - image: rust:1
+    steps:
+      - checkout
       - run:
           name: Run all tests
           command: cargo test --all
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test
